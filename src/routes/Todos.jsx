@@ -1,35 +1,34 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { fetcher } from "../utils"
+import { todoListAction } from "../actions/todosAction"
 
 function Todos() {
-  const [todos, setTodos] = useState([])
-  const fetchTodos = async limit => {
-    const res = await fetcher(`https://jsonplaceholder.typicode.com/todos`)
-    setTodos(res.slice(0, limit))
-  }
+  const { todoList } = useSelector(state => state.todos)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchTodos(10)
-  }, [])
+    dispatch(todoListAction(`https://jsonplaceholder.typicode.com/todos`, 10))
+  }, [dispatch])
 
   return (
     <ol style={{ listStyle: "none" }}>
-      {todos.map(todo => {
-        return (
-          <li key={todo.id}>
-            <Link
-              to={`/todo/${todo.id}`}
-              style={{
-                display: "block",
-                color: todo.completed ? "red" : "",
-              }}
-            >
-              {todo.title}
-            </Link>
-          </li>
-        )
-      })}
+      {todoList &&
+        todoList.map(todo => {
+          return (
+            <li key={todo.id}>
+              <Link
+                to={`/todo/${todo.id}`}
+                style={{
+                  display: "block",
+                  color: todo.completed ? "red" : "",
+                }}
+              >
+                {todo.title}
+              </Link>
+            </li>
+          )
+        })}
     </ol>
   )
 }

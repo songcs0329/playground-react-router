@@ -1,24 +1,23 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { fetcher } from "../utils"
+import { todoItemAction } from "../actions/todosAction"
 
 const Todo = () => {
   const params = useParams()
-  const [todo, setTodo] = useState({})
-  const fetchTodo = useCallback(async () => {
-    const res = await fetcher(`https://jsonplaceholder.typicode.com/todos/${params.id}`)
-    setTodo(res)
-  }, [params.id])
+  const { todoItem } = useSelector(state => state.todos)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchTodo()
-  }, [fetchTodo])
+    dispatch(todoItemAction(`https://jsonplaceholder.typicode.com/todos/${params.id}`))
+  }, [dispatch, params.id])
 
+  if (!todoItem) return <div>Loading...</div>
   return (
     <div style={{ padding: "1rem" }}>
-      <span>{todo.id}</span>&nbsp;
-      <span>{todo.userId}</span>
-      <h3>{todo.title}</h3>
+      <span>{todoItem.id}</span>&nbsp;
+      <span>{todoItem.userId}</span>
+      <h3>{todoItem.title}</h3>
     </div>
   )
 }

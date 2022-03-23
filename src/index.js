@@ -1,9 +1,11 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import reportWebVitals from "./reportWebVitals"
+import { composeWithDevTools } from "redux-devtools-extension"
 import { Provider } from "react-redux"
-import { createStore } from "@reduxjs/toolkit"
-import rootReducer from "./store"
+import { applyMiddleware, createStore } from "@reduxjs/toolkit"
+import createSagaMiddleware from "redux-saga"
+import rootReducer, { rootSaga } from "./store"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import App from "./App"
 import Expenses from "./routes/Expenses"
@@ -14,7 +16,9 @@ import Todo from "./routes/Todo"
 import Todos from "./routes/Todos"
 import Counter from "./routes/Counter"
 
-const store = createStore(rootReducer)
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>
