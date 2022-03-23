@@ -13,7 +13,8 @@ function App() {
         <Link to={"/invoices"}>Invoices</Link>&nbsp;|&nbsp;
         <Link to={"/expenses"}>Expenses</Link>&nbsp;|&nbsp;
         <Link to={"/query?string=song&idx=30"}>Query</Link>&nbsp;|&nbsp;
-        <Link to={"/todos"}>Todos</Link>
+        <Link to={"/todos"}>Todos</Link>&nbsp;|&nbsp;
+        <Link to={"/counter"}>Counter</Link>
       </nav>
       <Outlet />
     </div>
