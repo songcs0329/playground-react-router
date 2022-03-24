@@ -11,24 +11,24 @@ function Todos() {
     dispatch(todoListAction(`https://jsonplaceholder.typicode.com/todos`, 10))
   }, [dispatch])
 
+  if (!todoList) return <div>Loading...</div>
   return (
     <ol style={{ listStyle: "none" }}>
-      {todoList &&
-        todoList.map(todo => {
-          return (
-            <li key={todo.id}>
-              <Link
-                to={`/todo/${todo.id}`}
-                style={{
-                  display: "block",
-                  color: todo.completed ? "red" : "",
-                }}
-              >
-                {todo.title}
-              </Link>
-            </li>
-          )
-        })}
+      {todoList.map(todo => {
+        return (
+          <li key={todo.id}>
+            <Link
+              to={`/todo/${todo.id}`}
+              style={{
+                display: "block",
+                color: todo.completed ? "red" : "",
+              }}
+            >
+              {todo.title}
+            </Link>
+          </li>
+        )
+      })}
     </ol>
   )
 }
