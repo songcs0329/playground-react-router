@@ -15,44 +15,54 @@ import Query from "./routes/Query"
 import Todo from "./routes/Todo"
 import Todos from "./routes/Todos"
 import Counter from "./routes/Counter"
+import Users from "./routes/Users"
+import { QueryClient, QueryClientProvider } from "react-query"
+import User from "./routes/User"
+
+const queryClient = new QueryClient()
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)))
 sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="expenses" element={<Expenses />} />
-          <Route path="invoices" element={<Invoices />}>
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="expenses" element={<Expenses />} />
+            <Route path="invoices" element={<Invoices />}>
+              <Route
+                index
+                element={
+                  <main style={{ padding: "1rem" }}>
+                    <p>Select an invoice!</p>
+                  </main>
+                }
+              />
+              <Route path=":invoiceId" element={<Invoice />} />
+            </Route>
+            <Route path="query" element={<Query />} />
+            <Route path="todos" element={<Todos />} />
+            <Route path="todo/:id" element={<Todo />} />
+            <Route path="counter" element={<Counter />} />
+            <Route path="users" element={<Users />}>
+              <Route path=":userId" element={<User />} />
+            </Route>
             <Route
-              index
+              path="*"
               element={
                 <main style={{ padding: "1rem" }}>
-                  <p>Select an invoice!</p>
+                  <p>There's nothing here!</p>
                 </main>
               }
             />
-            <Route path=":invoiceId" element={<Invoice />} />
           </Route>
-          <Route path="query" element={<Query />} />
-          <Route path="todos" element={<Todos />} />
-          <Route path="todo/:id" element={<Todo />} />
-          <Route path="counter" element={<Counter />} />
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            }
-          />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </Provider>,
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+  </QueryClientProvider>,
   document.getElementById("root"),
 )
 
