@@ -1,7 +1,7 @@
 import React from "react"
 import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
-import { asyncFetcher } from "../utils"
+import { asyncFetcher } from "utils"
 
 const User = () => {
   const params = useParams()

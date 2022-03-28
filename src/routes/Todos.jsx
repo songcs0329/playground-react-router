@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { todoListAction } from "../actions/todosAction"
+import { todoListAction } from "actions/todosAction"
 
 function Todos() {
   const { todoList } = useSelector(state => state.todos)

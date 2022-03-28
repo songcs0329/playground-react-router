@@ -1,6 +1,6 @@
 import React from "react"
 import { useParams } from "react-router-dom"
-import { getInvoice } from "../data"
+import { getInvoice } from "data"
 
 function Invoice() {
   const params = useParams()

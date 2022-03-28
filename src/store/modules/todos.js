@@ -1,6 +1,6 @@
 import { put, call, takeLatest, takeEvery } from "redux-saga/effects"
-import { FETCH_TODOITEM, FETCH_TODOLIST, HADNLE_ERROR } from "../../constants"
-import { fetcher } from "../../utils"
+import { HADNLE_ERROR, FETCH_TODOITEM, FETCH_TODOLIST } from "constants"
+import { fetcher } from "utils"
 
 function* fetchTodoList(action) {
   try {

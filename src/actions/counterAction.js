@@ -1,4 +1,4 @@
-import { CHANGE_VALUE, DECREASE_COUNT, INCREASE_COUNT } from "../constants"
+import { INCREASE_COUNT, DECREASE_COUNT, CHANGE_VALUE } from "constants"
 
 export const increase = () => ({ type: INCREASE_COUNT })
 export const decrease = () => ({ type: DECREASE_COUNT })

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
-import { todoItemAction } from "../actions/todosAction"
+import { todoItemAction } from "actions/todosAction"
 
 const Todo = () => {
   const navigate = useNavigate()

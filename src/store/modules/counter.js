@@ -1,4 +1,4 @@
-import { CHANGE_VALUE, DECREASE_COUNT, INCREASE_COUNT } from "../../constants"
+import { INCREASE_COUNT, DECREASE_COUNT, CHANGE_VALUE } from "constants"
 
 const counterState = {
   number: 0,

@@ -1,6 +1,6 @@
 import React from "react"
 import { NavLink, Outlet, useLocation, useSearchParams } from "react-router-dom"
-import { getInvoices } from "../data"
+import { getInvoices } from "data"
 
 function Invoices() {
   let invoices = getInvoices()

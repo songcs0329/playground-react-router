@@ -1,7 +1,7 @@
 import React from "react"
 import { useQuery } from "react-query"
 import { Link, Outlet } from "react-router-dom"
-import { asyncFetcher } from "../utils"
+import { asyncFetcher } from "utils"
 
 const Users = () => {
   const users = useQuery("users", () => asyncFetcher(`https://jsonplaceholder.typicode.com/users`))
